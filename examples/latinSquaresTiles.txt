@@ -1,0 +1,23 @@
+; model (n = 3)
+(declare-datatypes () ((Value v1 v2 v3)))
+(declare-fun Tile (Value Value) Value)
+
+(assert (forall ((i Value) (j1 Value) (j2 Value)) (=> (not (= j1 j2)) (not (= (Tile i j1) (Tile i j2))))))
+(assert (forall ((i1 Value) (i2 Value) (j Value)) (=> (not (= i1 i2)) (not (= (Tile i1 j) (Tile i2 j))))))
+
+; scenario
+(assert (= (Tile v3 v1) v1))
+(assert (= (Tile v1 v2) v2))
+;(assert (= (Tile v3 v3) v3)) ; makes latin square impossible with previous scenario assertions
+
+(check-sat)
+
+(get-value ((Tile v1 v1)))
+(get-value ((Tile v2 v1)))
+(get-value ((Tile v3 v1)))
+(get-value ((Tile v1 v2)))
+(get-value ((Tile v2 v2)))
+(get-value ((Tile v3 v2)))
+(get-value ((Tile v1 v3)))
+(get-value ((Tile v2 v3)))
+(get-value ((Tile v3 v3)))

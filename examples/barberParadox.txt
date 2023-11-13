@@ -1,0 +1,8 @@
+(declare-datatypes () ((Person first (next (prev Person)))))
+(declare-fun Shaves (Person Person) Bool)
+(declare-const barber Person)
+
+(assert (forall ((x Person)) (=> (not (Shaves x x)) (Shaves barber x))))
+(assert (forall ((x Person)) (=> (Shaves barber x) (not (Shaves x x)))))
+
+(check-sat)

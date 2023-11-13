@@ -1,0 +1,5 @@
+(declare-const x Int)
+(declare-const y Int)
+(assert (and (> x 1) (and (= (mod x 3) 0) (= (mod x 7) 0))))
+(check-sat)
+(get-model)
