@@ -1,0 +1,12 @@
+from z3 import *
+s = Solver()
+OnTop = Function('OnTop', IntSort(), IntSort(), BoolSort())
+Green = Function('Green', IntSort(), BoolSort())
+s.add(OnTop(1,2))
+s.add(OnTop(2,3))
+s.add(Green(1))
+s.add(Not(Green(3)))
+x = Int('x')
+y = Int('y')
+s.add(Not(Exists([x,y], And(OnTop(x,y), Green(x), Not(Green(y))))))
+print(s.check())

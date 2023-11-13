@@ -1,0 +1,5 @@
+(declare-const A Bool)
+(declare-const B Bool)
+(assert (and (xor A B) A))
+(check-sat)
+(get-model)
